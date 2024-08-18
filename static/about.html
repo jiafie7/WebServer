@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebServer</title>
+    <link rel="icon" href="./favicon.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ddd;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .contact-info {
+            margin: 20px 0;
+        }
+        .contact-info a {
+            display: block;
+            color: #3498db;
+            text-decoration: none;
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        button {
+            background-color: #3498db;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="./cat.jpg" alt="photo" class="profile-img">
+        <h1>Hang Zhang</h1>
+        <p>Hi, I'm Hang! A passionate self-taught coder and final year master's student at the School of Computer Science at NUIST. I love to experiment with new technologies!</p>
+        <div class="contact-info">
+            <span>Email: cs_hzhang at 163 dot com</span>
+            <a href="https://github.com/jiafie7" target="_blank">GitHub: @jiafie7</a>
+            <a href="https:garfieldzhang.site" target="_blank">Blog: GarfieldZhang</a>
+        </div>
+        <form action="4" method="post">
+            <button type="submit">Back</button>
+        </form>
+    </div>
+</body>
+</html>
+
