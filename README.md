@@ -10,15 +10,15 @@ std::string password = "PASSWORD";
 std::string databaseName = "DATABASE";
 ```
 
-**Step 2:** Build and compile project files
+**Step 2:** Build and compile project files.
 
 ```sh
-cd build
+mkdir build && cd build
 cmake ..
 make
 ```
 
-**Step 3:** Run the WebServer
+**Step 3:** Run the WebServer.
 
 ```sh
 ./WebServer
