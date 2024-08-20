@@ -11,7 +11,6 @@
 #include <pthread.h>
 #include <sys/time.h>
 #include "../lock/locker.h"
-using namespace std;
 
 template <class T>
 class BlockQueue

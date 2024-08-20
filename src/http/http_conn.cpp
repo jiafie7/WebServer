@@ -42,9 +42,9 @@ void HttpConn::initMysqlResult(ConnectionPool *connPool)
     MYSQL_ROW row;
     while ((row = mysql_fetch_row(result)))
     {
-        string username(row[0] ? row[0] : "");
+        std::string username(row[0] ? row[0] : "");
         std::cout << username << '\n';
-        string password(row[1] ? row[1] : "");
+        std::string password(row[1] ? row[1] : "");
         std::cout << password << '\n';
         m_users[username] = password;
     }
@@ -118,7 +118,7 @@ void HttpConn::closeConn(bool realClose)
 
 // Initialize the connection, with socket address provided externally
 void HttpConn::init(int socketFd, const sockaddr_in &address, char *docRoot, int triggerMode,
-                     int logStatus, string user, string password, string databaseName)
+                     int logStatus, std::string user, std::string password, std::string databaseName)
 {
     m_socketFd = socketFd;
     m_address = address;

@@ -18,8 +18,8 @@ ConnectionPool *ConnectionPool::getInstance() {
     return &connPool;
 }
 
-void ConnectionPool::init(const string &url, const string &user, const string &password, 
-    const string &dbName, int port, int maxConn, int logStatus)
+void ConnectionPool::init(const std::string &url, const std::string &user, const std::string &password, 
+    const std::string &dbName, int port, int maxConn, int logStatus)
 {
 	m_url = url;
     m_port = port;

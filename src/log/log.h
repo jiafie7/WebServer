@@ -57,7 +57,7 @@ private:
     int m_currentDay;               // 当前日期（用于按天分类）
     FILE *m_fp;                     // 日志文件指针
     char *m_buffer;
-    BlockQueue<string> *m_logQueue; // 阻塞队列
+    BlockQueue<std::string> *m_logQueue; // 阻塞队列
     bool m_isAsync;                 // 是否异步标志
     Locker m_mutex;
     int m_logStatus;                 // 日志状态

@@ -4,7 +4,6 @@
 #include <stdarg.h>
 #include "log.h"
 #include <pthread.h>
-using namespace std;
 
 Log::Log()
     : m_logCount(0)
@@ -36,7 +35,7 @@ bool Log::init(const char *fileName, int logStatus, int logBufSize, int splitLin
     if (maxQueueSize >= 1)
     {
         m_isAsync = true;
-        m_logQueue = new BlockQueue<string>(maxQueueSize);
+        m_logQueue = new BlockQueue<std::string>(maxQueueSize);
         pthread_t tid;
         pthread_create(&tid, nullptr, flushLogThread, nullptr);
     }
@@ -136,7 +135,7 @@ void Log::writeLog(int level, const char *format, ...)
     va_list args;
     va_start(args, format);
 
-    string logMessage;
+    std::string logMessage;
     m_mutex.lock();
 
     int prefixLen = snprintf(m_buffer, 48, "%d-%02d-%02d %02d:%02d:%02d.%06ld %s ",
