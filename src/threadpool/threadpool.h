@@ -12,7 +12,6 @@ template <typename T>
 class ThreadPool
 {
 public:
-    /*thread_number是线程池中线程的数量，max_requests是请求队列中最多允许的、等待处理的请求的数量*/
     ThreadPool(int actorModel, ConnectionPool *connPool, int threadNumber = 8, int maxRequests = 10000);
     ~ThreadPool();
     bool append(T *request, int state);
@@ -24,14 +23,14 @@ private:
     void run();
 
 private:
-    int m_threadNumber;        // 线程池中的线程数
-    int m_maxRequests;         // 请求队列中允许的最大请求数
-    pthread_t *m_threads;      // 描述线程池的数组，其大小为m_threadNumber
-    std::list<T *> m_workQueue; // 请求队列
-    Locker m_queueLocker;      // 保护请求队列的互斥锁
-    Semaphore m_queueStat;           // 是否有任务需要处理
-    ConnectionPool *m_connPool; // 数据库连接池
-    int m_actorModel;          // 模型切换
+    int m_threadNumber;          // 线程池中的线程数
+    int m_maxRequests;           // 请求队列中允许的最大请求数
+    pthread_t *m_threads;        // 描述线程池的数组，其大小为m_threadNumber
+    std::list<T *> m_workQueue;  // 请求队列
+    Locker m_queueLocker;        // 保护请求队列的互斥锁
+    Semaphore m_queueStat;       // 是否有任务需要处理
+    ConnectionPool *m_connPool;  // 数据库连接池
+    int m_actorModel;            // 事件处理模式
 };
 
 template <typename T>
@@ -133,27 +132,32 @@ void ThreadPool<T>::run()
             {
                 if (request->readFromSocket())
                 {
-                    request->handleRequest(m_connPool);
+                  request->isImproved = 1;
+                  ConnectionRAII mysqlconn(&request->mysql, m_connPool);
+                  request->handleRequest(m_connPool);
                 }
                 else
                 {
-                    request->closeConn();
+                  request->isImproved = 1
+                  request->timerFlag = 1;
                 }
             }
             else
             {
                 if (request->writeToSocket())
                 {
-                    request->handleRequest(m_connPool);
+                  request->isImproved = 1
                 }
                 else
                 {
-                    request->closeConn();
+                  request->isImproved = 1
+                  request->timerFlag = 1;
                 }
             }
         }
         else
         {
+            ConnectionRAII mysqlconn(&request->mysql, m_connPool);
             request->handleRequest(m_connPool);
         }
     }
