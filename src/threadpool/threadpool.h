@@ -94,7 +94,7 @@ bool ThreadPool<T>::appendP(T *request)
         m_queueLocker.unlock();
         return false;
     }
-    m_workQueue.push_front(request); // Insert at the front of the queue
+    m_workQueue.push_back(request);
     m_queueLocker.unlock();
     m_queueStat.post();
     return true;
